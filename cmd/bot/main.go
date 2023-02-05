@@ -10,8 +10,6 @@ import (
 	"github.com/mrDuderino/tbot/internal/service/product"
 )
 
-//const token = "6086163787:AAGRiMC6GjzAsdiXS9BIlRFA8h1dEHd4IQo"
-
 func main() {
 	godotenv.Load()
 	token := os.Getenv("TOKEN")
@@ -34,19 +32,7 @@ func main() {
 	commander := commands.NewCommander(bot, productService)
 
 	for update := range updates {
-		if update.Message == nil {
-			continue
-		}
-
-		switch update.Message.Command() {
-		case "help":
-			commander.Help(update.Message)
-		case "list":
-			commander.List(update.Message)
-		default:
-			commander.Default(update.Message)
-		}
-
+		commander.HandleUpdate(update)
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 	}
 }
