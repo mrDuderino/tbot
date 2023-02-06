@@ -33,6 +33,6 @@ func main() {
 
 	for update := range updates {
 		commander.HandleUpdate(update)
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
+		//log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 	}
 }
